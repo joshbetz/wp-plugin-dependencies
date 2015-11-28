@@ -16,8 +16,11 @@ class WP_Plugin_Dependencies {
 
 		// File doesn't exist
 		if ( false === $file ) {
-			// TODO: Add admin notice.
-			// TODO: Add install link.
+			add_action( 'admin_notices', function() use ($plugin) {
+				// TODO: Add install link.
+				printf( '<div class="error"><p><strong>Warning:</strong> Dependency (%s) does not exist.</p></div>', esc_html( $plugin ) );
+			});
+
 			return false;
 		}
 
