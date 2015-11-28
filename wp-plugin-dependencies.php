@@ -33,7 +33,7 @@ class WP_Plugin_Dependencies {
 		self::include_plugin_with_scope( WP_PLUGIN_DIR . '/' . $file );
 
 		// Set plugin active
-		add_action( 'admin_init', function() {
+		add_action( 'admin_init', function() use ($file) {
 			add_filter( 'option_active_plugins', function( $plugins ) use ( $file ) {
 				if ( ! in_array( $file, $plugins ) ) {
 					$plugins[] = $file;
