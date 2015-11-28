@@ -51,6 +51,8 @@ class WP_Plugin_Dependencies {
 				);
 			});
 		}
+
+		return true;
 	}
 
 	private static function get_plugin_file( $plugin ) {
@@ -113,7 +115,7 @@ class WP_Plugin_Dependencies {
  * @param float $version (unused) The plugin version to require.
  */
 function wppd_require_plugin( $plugin, $version = '' ) {
-	WP_Plugin_Dependencies::require_plugin( $plugin );
+	return WP_Plugin_Dependencies::require_plugin( $plugin );
 }
 
 /**
@@ -126,7 +128,8 @@ function wppd_require_plugin( $plugin, $version = '' ) {
  * @param float $version (unused) The plugin version to require.
  */
 function wppd_require_module( $plugin, $module, $version = null ) {
-	wppd_require_plugin( $plugin, $version );
+	$plugin = wppd_require_plugin( $plugin, $version );
 	do_action( 'wppd_require_module', $plugin, $module );
+	return $plugin;
 }
 
